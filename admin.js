@@ -1,6 +1,9 @@
 var uuid = require("node-uuid");
 var _ = require("lodash");
+var express = require("express");
 var rooms = require("./data/rooms.json");
+
+var router = express.Router();
 
 module.exports = function (app) {
 
