@@ -24,7 +24,7 @@ app.get('/admin/rooms', function (req, res) {
 });
 
 app.get('/admin/rooms/add', function (req, res) {
-    res.render("add");
+    res.render("add", {title: "Add Rooms"});
 });
 
 app.post('/admin/rooms/add', function (req, res) {
@@ -42,14 +42,22 @@ app.get('/admin/rooms/edit/:id', function (req, res) {
     var roomId = req.params.id;
 
     var room = _.find(rooms, r => r.id === roomId);
+    if(!room){
+        res.sendStatus(404);
+        return;
+    }
 
-    res.render("edit", { room });
+    res.render("edit", {title: "Edit Rooms", room });
 });
 
 app.post('/admin/rooms/edit/:id', function (req, res) {
     var roomId = req.params.id;
 
     var room = _.find(rooms, r => r.id === roomId);
+    if(!room){
+        res.sendStatus(404);
+        return;
+    }
 
     room.name = req.body.name;
 
